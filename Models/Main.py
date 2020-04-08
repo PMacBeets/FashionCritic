@@ -86,10 +86,10 @@ model.summary()
 
 from tensorflow.keras.optimizers.schedules import PiecewiseConstantDecay
 
-batch_size = 1
+batch_size = 64
 num_instance = 50000
 # Let's say, if we want to decay the learning rate at 40, 80, 160 epochs
-boundary = (4 0 *num_instance // batch_size, 8 0 *num_instance // batch_size, 16 0 *num_instance // batch_size)
+boundary = (40*num_instance//batch_size, 80*num_instance // batch_size, 160*num_instance // batch_size)
 value = (1e-3, 3e-4, 1e-4, 3e-5)
 learning_rate = PiecewiseConstantDecay(boundary, value)
 print(learning_rate)
@@ -110,7 +110,7 @@ print('Model compiled.')
 epochs = 60
 print(x_train.shape)
 print(y_train.shape)
-history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size)
+history = model.fit(x_train, y_train, epochs=epochs, batch_size=batch_size, verbose=2)
 
 
 # In[ ]:
